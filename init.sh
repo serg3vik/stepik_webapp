@@ -4,7 +4,7 @@
 
 MAIN_APP_PATH=""
 
-if [ "$HOSTNAME"="thinkpad" ]; then
+if [ "$HOSTNAME" = thinkpad ]; then
     MAIN_APP_PATH="/home/sie/__git_projects/stepik/web-programming/trainingapp"
 else
     if [ "$EUID" -ne 0 ]
