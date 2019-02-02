@@ -3,18 +3,29 @@
 
 
 MAIN_APP_PATH=""
+NGINX_TRAINING_CONF_FILE = ""
+
 
 if [ "$HOSTNAME" = thinkpad ]; then
     MAIN_APP_PATH="/home/sie/__git_projects/stepik/web-programming/trainingapp"
+    NGINX_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/nginx_debug.conf"
 else
     if [ "$EUID" -ne 0 ]
-        then echo "Please run as root"
+        then echo "Please run me as root"
         exit
     fi
     MAIN_APP_PATH="/home/box/web"
+    NGINX_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/nginx_release.conf"
 fi
 
-NGINX_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/nginx.conf"
+if [ ! -f $NGINX_TRAINING_CONF_FILE ]; then
+    echo "$NGINX_TRAINING_CONF_FILE not found! Please create it first!"
+    exit
+else
+    ln -s $NGINX_TRAINING_CONF_FILE  /etc/nginx/sites-enabled/test.conf
+    /etc/init.d/nginx restart
+fi
+
 
 if [ ! -f $NGINX_TRAINING_CONF_FILE ]; then
     echo "$NGINX_TRAINING_CONF_FILE not found! Please create it first!"
