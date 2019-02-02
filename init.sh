@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 MAIN_APP_PATH=""
 NGINX_TRAINING_CONF_FILE=""
 
@@ -28,16 +26,6 @@ else
     ln -s $NGINX_TRAINING_CONF_FILE  /etc/nginx/sites-enabled/test.conf
     /etc/init.d/nginx restart
 fi
-
-
-if [ ! -f $NGINX_TRAINING_CONF_FILE ]; then
-    echo "$NGINX_TRAINING_CONF_FILE not found! Please create it first!"
-    exit
-else
-    ln -s $NGINX_TRAINING_CONF_FILE  /etc/nginx/sites-enabled/test.conf
-    /etc/init.d/nginx restart
-fi
-﻿
 
 GUNICORN_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/hello.py"
 
