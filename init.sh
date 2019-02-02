@@ -36,6 +36,9 @@ else
     if [ ! -d /etc/gunicorn.d/ ]; then
         mkdir /etc/gunicorn.d
     fi
+    if [ -f /etc/gunicorn.d/hello.py ]; then
+        rm -f /etc/gunicorn.d/hello.py
+    fi
     ln -s $GUNICORN_TRAINING_CONF_FILE  /etc/gunicorn.d/hello.py
     /etc/init.d/nginx restart
 fi
