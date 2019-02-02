@@ -25,13 +25,16 @@ else
 fi
 ﻿
 
-GUNICORN_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/gunicorn.conf"
+GUNICORN_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/hello.py"
 
 if [ ! -f $GUNICORN_TRAINING_CONF_FILE ]; then
     echo "$GUNICORN_TRAINING_CONF_FILE not found! Please create it first!"
     exit
 else
-    ln -s $GUNICORN_TRAINING_CONF_FILE  /etc/gunicorn.d/test
+    if [ ! -d /etc/gunicorn.d/ ]; then
+        mkdir /etc/gunicorn.d
+    fi
+    ln -s $GUNICORN_TRAINING_CONF_FILE  /etc/gunicorn.d/hello.py
     /etc/init.d/nginx restart
 fi
 
