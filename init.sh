@@ -3,7 +3,7 @@
 
 
 MAIN_APP_PATH=""
-NGINX_TRAINING_CONF_FILE = ""
+NGINX_TRAINING_CONF_FILE=""
 
 
 if [ "$HOSTNAME" = thinkpad ]; then
@@ -22,6 +22,9 @@ if [ ! -f $NGINX_TRAINING_CONF_FILE ]; then
     echo "$NGINX_TRAINING_CONF_FILE not found! Please create it first!"
     exit
 else
+    if [ -f /etc/nginx/sites-enabled/test.conf ]; then
+        rm -f /etc/nginx/sites-enabled/test.conf
+    fi
     ln -s $NGINX_TRAINING_CONF_FILE  /etc/nginx/sites-enabled/test.conf
     /etc/init.d/nginx restart
 fi
