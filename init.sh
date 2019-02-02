@@ -27,6 +27,12 @@ else
     /etc/init.d/nginx restart
 fi
 
+
+#remove 'default' config from 'sites-enabled'
+if [ -f /etc/nginx/sites-enabled/default ]; then
+    rm -f /etc/nginx/sites-enabled/default 
+fi
+
 GUNICORN_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/hello.py"
 
 if [ ! -f $GUNICORN_TRAINING_CONF_FILE ]; then
