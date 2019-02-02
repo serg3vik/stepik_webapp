@@ -44,7 +44,7 @@ else
 fi
 
 if [ -f /etc/init.d/gunicorn ]; then
-    /etc/init.d/gunicorn restart 
+    /etc/init.d/gunicorn restart hello:app
 fi
 
 if [ -f /etc/init.d/mysql ]; then
