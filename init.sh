@@ -20,10 +20,7 @@ if [ ! -f $NGINX_TRAINING_CONF_FILE ]; then
     echo "$NGINX_TRAINING_CONF_FILE not found! Please create it first!"
     exit
 else
-    if [ -f /etc/nginx/sites-enabled/test.conf ]; then
-        rm -f /etc/nginx/sites-enabled/test.conf
-    fi
-    ln -s $NGINX_TRAINING_CONF_FILE  /etc/nginx/sites-enabled/test.conf
+    ln -sf $NGINX_TRAINING_CONF_FILE  /etc/nginx/sites-enabled/test.conf
     /etc/init.d/nginx restart
 fi
 
