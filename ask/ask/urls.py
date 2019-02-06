@@ -22,11 +22,11 @@ from django.urls import  path
 urlpatterns = [
     path('', include('qa.urls')),
     path('admin/', admin.site.urls),
-    path(r'^question/\d+', include('qa.urls')),
+    path(r'question/\d+', include('qa.urls')),
     path('login/', include('qa.urls')),
-    path(r'^signup/', include('qa.urls')),
-    path(r'^ask/', include('qa.urls')),
-    path(r'^popular/', include('qa.urls')),
-    path(r'^new/', include('qa.urls'))
+    path('signup/', include('qa.urls')),
+    path('ask/', include('qa.urls')),
+    path('popular/', include('qa.urls')),
+    path('new/', include('qa.urls'))
     
 ]

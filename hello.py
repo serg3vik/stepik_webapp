@@ -1,8 +1,11 @@
 def app(environ, start_response):
     
+
+    print ("Weeee are the champions my frieeeeeend!")
     data = 'Give me some params, please'
     querystr_raw = environ['QUERY_STRING']
     if querystr_raw:
+        #pass
         data = querystr_raw.replace('&', '\n')
     
     

@@ -1,19 +1,11 @@
 #!/bin/bash
 
-MAIN_APP_PATH=""
-NGINX_TRAINING_CONF_FILE=""
+MAIN_APP_PATH="$HOME/web"
+NGINX_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/nginx.conf"
 
-
-if [ "$HOSTNAME" = thinkpad ]; then
-    MAIN_APP_PATH="/home/sie/__git_projects/stepik/web-programming/trainingapp"
-    NGINX_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/nginx_debug.conf"
-else
-    if [ "$EUID" -ne 0 ]
-        then echo "Please run me as root"
-        exit
-    fi
-    MAIN_APP_PATH="/home/box/web"
-    NGINX_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/nginx_release.conf"
+#removing 'default' config from 'sites-enabled'
+if [ -f /etc/nginx/sites-enabled/default ]; then
+    rm -f /etc/nginx/sites-enabled/default 
 fi
 
 if [ ! -f $NGINX_TRAINING_CONF_FILE ]; then
@@ -24,13 +16,7 @@ else
     /etc/init.d/nginx restart
 fi
 
-
-#remove 'default' config from 'sites-enabled'
-if [ -f /etc/nginx/sites-enabled/default ]; then
-    rm -f /etc/nginx/sites-enabled/default 
-fi
-
-GUNICORN_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/hello.py"
+GUNICORN_TRAINING_CONF_FILE="$MAIN_APP_PATH/etc/gunicorncfg_hello.py"
 
 if [ ! -f $GUNICORN_TRAINING_CONF_FILE ]; then
     echo "$GUNICORN_TRAINING_CONF_FILE not found! Please create it first!"
